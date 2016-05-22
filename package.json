@@ -2,7 +2,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "rm -rf dist && BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.production.js && cp index.html dist/index.html && cp -r static/* dist",
+    "build": "rm -rf dist && BABEL_ENV=production ./node_modules/.bin/webpack --config webpack.config.production.js && cp -r static/* dist",
     "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
