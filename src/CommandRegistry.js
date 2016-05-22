@@ -13,7 +13,8 @@ export default class CommandRegistry {
   }
 
   resolve(commandName) {
-    let foundCommand = this.commands.find(command => command.name === commandName);
+    let downcasedCommandName = commandName.toLowerCase();
+    let foundCommand = this.commands.find(command => command.name === downcasedCommandName);
 
     if (foundCommand) {
       if (typeof foundCommand.handler === 'function') {
@@ -131,8 +132,8 @@ registry.register({
   description: 'View source of this page',
   output: `Head on to
            <a href="https://github.com/vishaltelangre/vishaltelangre.com" target="_blank">
-            this repository
-           </a>.`
+            this repository.
+           </a>`
 });
 
 registry.register({
