@@ -62,8 +62,8 @@ registry.register({
            <br/><br/>
            Maybe you don't know this; during academics, I had created a popular
            college search engine for colleges in Maharashtra.
-           It was aimed to suggest colleges based on student's marks,
-           cutoff marks, and other various criteria.
+           It was aimed to suggest colleges based on students' marks,
+           cutoff marks, and various other criteria.
           Head on to <a href="http://2zerozero.com/">2zerozero.com</a>
           to see it live.
           It is a past 2012 college project, and still alive,
@@ -147,7 +147,7 @@ registry.register({
 
 registry.register({
   name: 'help',
-  description: 'See these list of commands again',
+  description: 'Show available commands',
   handler: () => {
     return CommandRegistry.sharedInstance().commands.map(({ name, description }) => {
       return `<span style="min-width: 120px; display: inline-block;">${name}</span>
