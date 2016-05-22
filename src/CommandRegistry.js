@@ -59,8 +59,8 @@ registry.register({
            <a href="http://yogurtlabs.co" target="_blank">Yogurt Labs</a>, and
            <a href="http://weboniselab.com" target="_blank">Webonise Lab</a>.
            <br/><br/>
-           Just to mention you, during academics; I created a popular college
-           search engine for colleges in Maharashtra.
+           Maybe you don't know this; during academics, I had created a popular
+           college search engine for colleges in Maharashtra.
            It was aimed to suggest colleges based on student's marks,
            cutoff marks, and other various criteria.
           Head on to <a href="http://2zerozero.com/">2zerozero.com</a>
@@ -124,6 +124,15 @@ registry.register({
             <a href="http://500px.com/vishaltelangre" target="_blank">500px</a>,
             <a href="https://plus.google.com/u/0/117409082821975320389" target="_blank">Google+</a>,
             <a href="http://www.imdb.com/user/ur25704938/" target="_blank">IMDb</a>.`
+});
+
+registry.register({
+  name: 'source',
+  description: 'View source of this page',
+  output: `Head on to
+           <a href="https://github.com/vishaltelangre/vishaltelangre.com" target="_blank">
+            this repository
+           </a>.`
 });
 
 registry.register({

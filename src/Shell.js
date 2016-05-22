@@ -11,7 +11,8 @@ export default class Shell extends Component {
     super(props);
 
     this.state = {
-      history: historyInstance.history
+      history: historyInstance.history,
+      currentCommandName: ''
     };
   }
 
@@ -27,7 +28,8 @@ export default class Shell extends Component {
 
   syncStore() {
     this.setState({
-      history: historyInstance.history
+      history: historyInstance.history,
+      currentCommandName: historyInstance.current() && historyInstance.current().name
     }, () => {
       this.refs.commandField.scrollIntoView(true);
     });
@@ -37,9 +39,15 @@ export default class Shell extends Component {
     this.refs.commandField.focus();
   }
 
-  addCommandToHistory(command) {
-    command = command.trim();
-    historyInstance.push(command);
+  addCommandToHistory(commandName) {
+    commandName = commandName.trim();
+    historyInstance.push({ name: commandName });
+  }
+
+  onChange(event) {
+    this.setState({
+      currentCommandName: event.target.value
+    });
   }
 
   handleCommand(event) {
@@ -51,6 +59,16 @@ export default class Shell extends Component {
     }
   }
 
+  handleKeyDown(event) {
+    if (event.which === 38 /* Up key */) {
+      historyInstance.seekPrev();
+    }
+
+    if (event.which === 40 /* Down key */) {
+      historyInstance.seekNext();
+    }
+  }
+
   render() {
     return (
       <div>
@@ -59,10 +77,10 @@ export default class Shell extends Component {
             return (
               <div key={ index }>
                 <ShellPrompt />
-                <span className="command">{ command }</span>
+                <span className="command">{ command.name }</span>
                 <p style={{ padding: 0, margin: '5px 0' }}
                    dangerouslySetInnerHTML={{
-                    __html: CommandRegistry.sharedInstance().resolve(command).output
+                    __html: CommandRegistry.sharedInstance().resolve(command.name).output
                   }}>
                 </p>
               </div>
@@ -72,8 +90,11 @@ export default class Shell extends Component {
         <ShellPrompt />
         <input type="text" autofocus ref="commandField"
                 className="command"
+                value={ this.state.currentCommandName }
                 onBlur={ this.focus.bind(this) }
-                onKeyPress={ this.handleCommand.bind(this) } />
+                onChange={ this.onChange.bind(this) }
+                onKeyPress={ this.handleCommand.bind(this) }
+                onKeyDown={ this.handleKeyDown.bind(this) } />
       </div>
     );
   }
