@@ -11,3 +11,11 @@ render(
   document.getElementById('root')
 );
 
+// Keep focus in the input command field.
+document.querySelector('body').addEventListener('keydown', (evt) => {
+  evt = evt || event;
+  if (evt.keyCode === 9 /* Tab key */) {
+    event.preventDefault();
+    document.querySelector('input.command').focus();
+  }
+});

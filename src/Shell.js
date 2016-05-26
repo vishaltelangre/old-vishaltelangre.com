@@ -36,7 +36,8 @@ export default class Shell extends Component {
   }
 
   focus() {
-    this.refs.commandField.focus();
+    // NOTE: setTimeout is required to make it work inside Firefox and Safari.
+    setTimeout(() => this.refs.commandField.focus(), 0);
   }
 
   addCommandToHistory(commandName) {
