@@ -2,6 +2,7 @@
 
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -20,7 +21,12 @@ module.exports = {
   devtool: 'eval-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      template: './static/index.ejs',
+      // Inject any JavaScript into the bottom of the page, just before the closing </body> tag
+      inject: 'body'
+    })
   ],
   module: {
     loaders: [

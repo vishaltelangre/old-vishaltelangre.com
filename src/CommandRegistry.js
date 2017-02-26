@@ -47,7 +47,16 @@ let registry = CommandRegistry.sharedInstance();
 registry.register({
   name: 'about',
   description: 'A bit about me',
-  output: 'Umm... You better ask something else.'
+  output: `Umm... You better ask something else.
+           <br/>How about \`help\`, huh?`
+});
+
+registry.register({
+  name: 'clicks',
+  description: 'My Photography',
+  output: `Please visit <a href="http://clicks.vishaltelangre.com"
+           target="_blank">clicks.vishaltelangre.com</a>
+           to see my photography.`
 });
 
 registry.register({
@@ -64,7 +73,7 @@ registry.register({
            college search engine for colleges in Maharashtra.
            It was aimed to suggest colleges based on students' marks,
            cutoff marks, and various other criteria.
-          Head on to <a href="http://2zerozero.com/">2zerozero.com</a>
+          Head on to <a href="http://2zerozero.com/" target="_blank">2zerozero.com</a>
           to see it live.
           It is a past 2012 college project, and still alive,
           but not actively maintained!`
@@ -118,7 +127,7 @@ registry.register({
 registry.register({
   name: 'elsewhere',
   description: 'Other places I can be found',
-  output: `<a href="http://twitter.com/suruwat">Twitter</a>,
+  output: `<a href="http://twitter.com/suruwat" target="_blank">Twitter</a>,
             <a href="http://in.linkedin.com/in/vishaltelangre/" target="_blank">LinkedIn</a>,
             <a href="http://stackoverflow.com/users/1052356/vishal" target="_blank">StackOverflow</a>,
             <a href="http://facebook.com/vishaltelangre" target="_blank">Facebook</a>,

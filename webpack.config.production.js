@@ -2,12 +2,13 @@
 
 var webpack = require('webpack');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: 'bundle-[hash].js',
     publicPath: '/'
   },
   resolve: {
@@ -25,6 +26,11 @@ module.exports = {
       compress: {
         warnings: false
       }
+    }),
+    new HtmlWebpackPlugin({
+      template: './static/index.ejs',
+      // Inject any JavaScript into the bottom of the page, just before the closing </body> tag
+      inject: 'body'
     })
   ],
   module: {
