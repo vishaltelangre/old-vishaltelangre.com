@@ -1,15 +1,13 @@
 # Personal website of Vishal Telangre
 
-### Running Locally
+### To run locally
 
 ```
-yarn install
-yarn start
+elm-app start
 ```
-Open http://localhost:3000
 
-### Generating a Production Build
+### To make production build
 
 ```
-yarn build
+elm-app build
 ```
