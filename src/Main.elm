@@ -1,6 +1,6 @@
 module Main exposing (..)
 
-import Html exposing (Html, text, p)
+import Html exposing (Html, text, div, p)
 
 
 ---- MODEL ----
@@ -34,7 +34,27 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    p [] [ text "Hello world" ]
+    div [] [ viewIntro ]
+
+
+viewIntro : Html msg
+viewIntro =
+    div []
+        [ p []
+            [ text """
+                    Welcome! I am Vishal.
+                    It is a cumbersome job for me to setup a nice homepage.
+                    So, I have made it bit boring.
+                    """
+            ]
+        , p []
+            [ text """
+                    For more information,
+                    enter command `help` to list all available commands.
+                    Type `about` to know a little bit about me.
+                    """
+            ]
+        ]
 
 
 
