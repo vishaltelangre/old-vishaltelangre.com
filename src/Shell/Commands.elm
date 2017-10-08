@@ -79,11 +79,11 @@ shellCommandClicks =
 
         result =
             span []
-                [ text "Please visit"
+                [ text "Please visit "
                 , a
                     [ href "http://clicks.vishaltelangre.com", target "_blank" ]
                     [ text "clicks.vishaltelangre.com" ]
-                , text "to see my photography."
+                , text " to see my photography."
                 ]
     in
         ShellCommand description result
@@ -97,18 +97,18 @@ shellCommandWork =
 
         result =
             span []
-                [ text "I work remotely at"
+                [ text "I work remotely at "
                 , a
                     [ href "http://bigbinary.com", target "_blank" ]
                     [ text "BigBinary" ]
                 , text "."
                 , br [] []
                 , br [] []
-                , text "Previously, I worked at"
+                , text "Previously, I worked at "
                 , a
                     [ href "http://yogurtlabs.co", target "_blank" ]
                     [ text "Yogurt Labs" ]
-                , text ", and"
+                , text ", and "
                 , a
                     [ href "http://weboniselab.com", target "_blank" ]
                     [ text "Webonise Lab" ]
@@ -120,11 +120,11 @@ shellCommandWork =
                           colleges in Maharashtra. It was aimed to suggest
                           colleges based on students' marks, cutoff marks
                           and various other criteria.
-                          Head on to"""
+                          Head on to """
                 , a
                     [ href "http://2zerozero.com/", target "_blank" ]
                     [ text "2zerozero.com" ]
-                , text """to see it live.
+                , text """ to see it live.
                           It is a past 2012 college project, and still alive,
                           but not actively maintained!"""
                 ]
@@ -140,7 +140,7 @@ shellCommandGithub =
 
         result =
             span []
-                [ text "You can find my open source work"
+                [ text "You can find my open source work "
                 , a
                     [ href "https://github.com/vishaltelangre", target "_blank" ]
                     [ text "here" ]
@@ -174,7 +174,7 @@ shellCommandBlog =
 
         result =
             span []
-                [ text "I occasionally write on"
+                [ text "I occasionally write on "
                 , a
                     [ href "http://blog.vishaltelangre.com", target "_blank" ]
                     [ text "Poor Programmer's Blog" ]
@@ -243,21 +243,27 @@ shellCommandElsewhere =
                 [ a
                     [ href "http://twitter.com/suruwat", target "_blank" ]
                     [ text "Twitter" ]
+                , text ", "
                 , a
                     [ href "http://in.linkedin.com/in/vishaltelangre", target "_blank" ]
                     [ text "LinkedIn" ]
+                , text ", "
                 , a
                     [ href "http://stackoverflow.com/users/1052356/vishal", target "_blank" ]
                     [ text "StackOverflow" ]
+                , text ", "
                 , a
                     [ href "http://facebook.com/vishaltelangre", target "_blank" ]
                     [ text "Facebook" ]
+                , text ", "
                 , a
                     [ href "http://500px.com/vishaltelangre", target "_blank" ]
                     [ text "500px" ]
+                , text ", "
                 , a
                     [ href "https://plus.google.com/u/0/117409082821975320389", target "_blank" ]
                     [ text "Google+" ]
+                , text ", "
                 , a
                     [ href "http://www.imdb.com/user/ur25704938", target "_blank" ]
                     [ text "IMDb" ]
@@ -274,7 +280,7 @@ shellCommandSource =
 
         result =
             span []
-                [ text "Head on to"
+                [ text "Head on to "
                 , a
                     [ href "https://github.com/vishaltelangre/vishaltelangre.com", target "_blank" ]
                     [ text "this repository" ]
@@ -318,6 +324,7 @@ shellCommandHelp =
             allShellCommands
                 |> Dict.toList
                 |> List.map (\( name, command ) -> ( name, command.description ))
+                |> List.reverse
                 |> (::) ( "help", description )
                 |> List.reverse
                 |> List.map usage
