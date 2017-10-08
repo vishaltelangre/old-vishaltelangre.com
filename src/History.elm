@@ -1,9 +1,10 @@
-module History exposing (add, view)
+module History exposing (add, view, get)
 
+import Array
 import Html exposing (Html, text, div, span, br)
-import Models exposing (History)
+import Models exposing (History, HistoryItem)
 import Msgs exposing (Msg(..))
-import Shell.Commands exposing (ShellCommandName, ShellCommand, ShellCommandResult)
+import Shell.Commands exposing (ShellCommandName)
 import Shell.View
 
 
@@ -14,6 +15,14 @@ add commandName history =
             Shell.Commands.get commandName |> .result
     in
         ( commandName, result ) :: history
+
+
+get : Int -> History -> Maybe HistoryItem
+get index history =
+    history
+        |> List.reverse
+        |> Array.fromList
+        |> Array.get index
 
 
 view : History -> Html Msg
