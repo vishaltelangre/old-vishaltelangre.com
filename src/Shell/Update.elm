@@ -37,14 +37,22 @@ handleEnterKeypress model =
     let
         commandName =
             String.trim model.currentCommandName
+
+        history_ =
+            case commandName of
+                "clear" ->
+                    History.add commandName []
+
+                _ ->
+                    History.add commandName model.history
     in
         if String.isEmpty commandName then
             { model | currentCommandName = commandName } ! [ Cmd.none ]
         else
             { model
                 | currentCommandName = ""
-                , history = History.add commandName model.history
-                , lastCommandIndex = (List.length model.history) + 1
+                , history = history_
+                , lastCommandIndex = List.length history_
             }
                 ! [ Cmd.none ]
 
