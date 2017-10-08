@@ -1,19 +1,30 @@
 module Main exposing (..)
 
-import Html exposing (Html, text, div, p)
-import Msgs exposing (Msg)
+import History exposing (History)
+import Html exposing (Html, text, div, p, span, input)
+import Html.Attributes exposing (style, type_, id, autofocus, value)
+import Html.Events exposing (onInput, on, keyCode, onBlur)
+import Json.Decode
+import Msgs exposing (Msg(..))
+import ShellCommands exposing (ShellCommandName, ShellCommand, ShellCommandResult)
 
 
 ---- MODEL ----
 
 
 type alias Model =
-    {}
+    { history : History
+    , currentCommandName : ShellCommandName
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( {}, Cmd.none )
+    ( { history = History.init
+      , currentCommandName = ""
+      }
+    , Cmd.none
+    )
 
 
 
@@ -22,7 +33,36 @@ init =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        Input newName ->
+            { model | currentCommandName = newName } ! [ Cmd.none ]
+
+        KeyDown keyCode ->
+            if keyCode == enterKeyCode then
+                handleEnterKeypress model
+            else
+                model ! [ Cmd.none ]
+
+
+enterKeyCode : Int
+enterKeyCode =
+    13
+
+
+handleEnterKeypress : Model -> ( Model, Cmd Msg )
+handleEnterKeypress model =
+    let
+        commandName =
+            String.trim model.currentCommandName
+    in
+        if String.isEmpty commandName then
+            { model | currentCommandName = commandName } ! [ Cmd.none ]
+        else
+            { model
+                | currentCommandName = ""
+                , history = History.add commandName model.history
+            }
+                ! [ Cmd.none ]
 
 
 
@@ -31,7 +71,37 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div [] [ viewIntro ]
+    div []
+        [ viewIntro
+        , History.view model.history
+        , viewShellPrompt model.currentCommandName
+        ]
+
+
+viewShellPrompt : String -> Html Msg
+viewShellPrompt commandName =
+    div []
+        [ viewShellPromptPrefix
+        , input
+            [ type_ "text"
+            , id "prompt"
+            , autofocus True
+            , onInput Input
+            , onKeyDown KeyDown
+            , value commandName
+            ]
+            []
+        ]
+
+
+viewShellPromptPrefix : Html Msg
+viewShellPromptPrefix =
+    span [ style [ ( "color", "#f00" ) ] ] [ text "$ " ]
+
+
+onKeyDown : (Int -> msg) -> Html.Attribute msg
+onKeyDown tagger =
+    on "keydown" (Json.Decode.map tagger keyCode)
 
 
 viewIntro : Html msg
