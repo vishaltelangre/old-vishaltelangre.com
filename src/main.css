@@ -2,11 +2,12 @@
   display: none;
 }
 
-p {
+p, span, input {
   font-size: 18px;
+  font-family: monospace;
 }
 
-.command {
+#prompt {
   max-width: 400px;
   width: 100%;
   background: #000;
@@ -14,4 +15,8 @@ p {
   border: 0px solid #000;
   color: #fff;
   font-weight: bold;
+}
+
+.help, .help * {
+  font-size: 14px;
 }

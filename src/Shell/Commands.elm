@@ -1,8 +1,8 @@
 module Shell.Commands exposing (..)
 
 import Dict exposing (Dict)
-import Html exposing (Html, span, text, br, a)
-import Html.Attributes exposing (href, target, style)
+import Html exposing (Html, span, text, br, a, div)
+import Html.Attributes exposing (href, target, style, class)
 import Msgs exposing (Msg)
 
 
@@ -328,7 +328,7 @@ shellCommandHelp =
 
 usage : ( ShellCommandName, Html Msg ) -> ShellCommandResult
 usage ( name, description ) =
-    span []
+    div [ class "help" ]
         [ span
             [ style
                 [ ( "minWidth", "120px" )
