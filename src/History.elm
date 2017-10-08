@@ -1,25 +1,17 @@
-module History exposing (..)
+module History exposing (add, view)
 
 import Html exposing (Html, text, div, span, br)
-import Html.Attributes exposing (style)
+import Models exposing (History)
 import Msgs exposing (Msg(..))
-import ShellCommands exposing (ShellCommandName, ShellCommand, ShellCommandResult)
-
-
-type alias History =
-    List ( ShellCommandName, ShellCommandResult )
-
-
-init : History
-init =
-    []
+import Shell.Commands exposing (ShellCommandName, ShellCommand, ShellCommandResult)
+import Shell.View
 
 
 add : ShellCommandName -> History -> History
 add commandName history =
     let
         result =
-            ShellCommands.get commandName |> .result
+            Shell.Commands.get commandName |> .result
     in
         ( commandName, result ) :: history
 
@@ -29,7 +21,7 @@ view history =
     let
         viewHistoryItem ( commandName, result ) =
             div []
-                [ viewShellPromptPrefix
+                [ Shell.View.promptPrefix
                 , span [] [ text commandName ]
                 , br [] []
                 , result
@@ -39,8 +31,3 @@ view history =
             |> List.reverse
             |> List.map viewHistoryItem
             |> div []
-
-
-viewShellPromptPrefix : Html Msg
-viewShellPromptPrefix =
-    span [ style [ ( "color", "#f00" ) ] ] [ text "$ " ]

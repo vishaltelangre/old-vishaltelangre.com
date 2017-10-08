@@ -1,4 +1,4 @@
-module ShellCommands exposing (..)
+module Shell.Commands exposing (..)
 
 import Dict exposing (Dict)
 import Html exposing (Html, span, text, br, a)
