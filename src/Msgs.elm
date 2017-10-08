@@ -2,4 +2,5 @@ module Msgs exposing (..)
 
 
 type Msg
-    = NoOp
+    = Input String
+    | KeyDown Int
