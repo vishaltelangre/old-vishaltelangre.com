@@ -1,6 +1,7 @@
 module Main exposing (..)
 
 import Html exposing (Html, text, div, p)
+import Msgs exposing (Msg)
 
 
 ---- MODEL ----
@@ -17,10 +18,6 @@ init =
 
 
 ---- UPDATE ----
-
-
-type Msg
-    = NoOp
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
