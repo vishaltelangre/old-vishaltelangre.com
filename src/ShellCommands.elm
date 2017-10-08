@@ -42,6 +42,19 @@ allShellCommands =
         |> Dict.fromList
 
 
+get : ShellCommandName -> ShellCommand
+get name =
+    case Dict.get name allShellCommands of
+        Just shellCommand ->
+            shellCommand
+
+        Nothing ->
+            if name == "help" then
+                shellCommandHelp
+            else
+                shellCommandNotFound name
+
+
 shellCommandAbout : ShellCommand
 shellCommandAbout =
     let
@@ -279,6 +292,18 @@ shellCommandClear =
 
         result =
             text ""
+    in
+        ShellCommand description result
+
+
+shellCommandNotFound : ShellCommandName -> ShellCommand
+shellCommandNotFound name =
+    let
+        description =
+            text ""
+
+        result =
+            span [] [ text ("command not found - " ++ name) ]
     in
         ShellCommand description result
 
