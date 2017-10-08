@@ -10,13 +10,17 @@ type alias ShellCommandName =
     String
 
 
+type alias ShellCommandResult =
+    Html Msg
+
+
 type alias ShellCommands =
     Dict ShellCommandName ShellCommand
 
 
 type alias ShellCommand =
     { description : Html Msg
-    , result : Html Msg
+    , result : ShellCommandResult
     }
 
 
@@ -297,7 +301,7 @@ shellCommandHelp =
         ShellCommand description result
 
 
-usage : ( ShellCommandName, Html Msg ) -> Html Msg
+usage : ( ShellCommandName, Html Msg ) -> ShellCommandResult
 usage ( name, description ) =
     span []
         [ span
