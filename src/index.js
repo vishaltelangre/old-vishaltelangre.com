@@ -1,7 +1,17 @@
 import './main.css';
 import { Main } from './Main.elm';
 
-Main.embed(document.getElementById('root'));
+const app = Main.embed(document.getElementById('root'));
+
+app.ports.scrollIntoView.subscribe(elementId => {
+  setTimeout(() => {
+    const element = document.getElementById(elementId);
+
+    if (element) {
+      element.scrollIntoView(false);
+    }
+  }, 50);
+});
 
 // Keep focus in the prompt on pressing Tab key
 document.querySelector('body').addEventListener('keydown', (evt) => {

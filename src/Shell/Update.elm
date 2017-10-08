@@ -4,6 +4,7 @@ import History
 import Models exposing (Model)
 import Msgs exposing (Msg(..))
 import Shell.Commands exposing (ShellCommandName)
+import Ports
 
 
 type Direction
@@ -54,7 +55,7 @@ handleEnterKeypress model =
                 , history = history_
                 , lastCommandIndex = List.length history_
             }
-                ! [ Cmd.none ]
+                ! [ Ports.scrollIntoView "prompt" ]
 
 
 handleArrowKeypress : Direction -> Model -> ( Model, Cmd Msg )
