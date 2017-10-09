@@ -2,7 +2,7 @@ module History exposing (add, view, get)
 
 import Array
 import Html exposing (Html, text, div, span, br)
-import Html.Attributes exposing (style)
+import Html.Attributes exposing (style, class)
 import Models exposing (History, HistoryItem)
 import Msgs exposing (Msg(..))
 import Shell.Commands exposing (ShellCommandName)
@@ -32,7 +32,7 @@ view history =
         viewHistoryItem ( commandName, result ) =
             div [ style [ ( "marginBottom", "10px" ) ] ]
                 [ Shell.View.promptPrefix
-                , span [] [ text commandName ]
+                , span [ class "command" ] [ text commandName ]
                 , br [] []
                 , result
                 ]

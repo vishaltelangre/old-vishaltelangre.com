@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import History
 import Html exposing (Html, text, div, p, span)
+import Html.Attributes exposing (class)
 import Models exposing (Model)
 import Msgs exposing (Msg(..))
 import Shell.Update
@@ -45,11 +46,11 @@ viewIntro =
                     """
             ]
         , p []
-            [ text """
-                    For more information,
-                    enter command `help` to list all available commands.
-                    Type `about` to know a little bit about me.
-                    """
+            [ span [] [ text "For more information enter command " ]
+            , span [ class "command" ] [ text "help" ]
+            , span [] [ text " to list all available commands. Type " ]
+            , span [ class "command" ] [ text "about" ]
+            , span [] [ text " to know a little bit about me." ]
             ]
         ]
 

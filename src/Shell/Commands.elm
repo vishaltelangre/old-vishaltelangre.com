@@ -65,7 +65,9 @@ shellCommandAbout =
             span []
                 [ text "Umm... You better ask something else."
                 , br [] []
-                , text "How about `help`, huh?"
+                , text "Enter "
+                , span [ class "command" ] [ text "help" ]
+                , text " to know more about me! 🙂"
                 ]
     in
         ShellCommand description result
@@ -309,7 +311,10 @@ shellCommandNotFound name =
             text ""
 
         result =
-            span [] [ text ("command not found - " ++ name) ]
+            span []
+                [ text "command not found - "
+                , span [ class "command" ] [ text name ]
+                ]
     in
         ShellCommand description result
 
@@ -342,6 +347,6 @@ usage ( name, description ) =
                 , ( "display", "inline-block" )
                 ]
             ]
-            [ text name ]
+            [ span [ class "command" ] [ text name ] ]
         , description
         ]
