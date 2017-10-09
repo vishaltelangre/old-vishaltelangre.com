@@ -37,7 +37,7 @@ handleEnterKeypress : Model -> ( Model, Cmd Msg )
 handleEnterKeypress model =
     let
         commandName =
-            String.trim model.currentCommandName
+            model.currentCommandName |> String.trim |> String.toLower
 
         history_ =
             case commandName of
