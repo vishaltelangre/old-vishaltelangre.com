@@ -1,6 +1,9 @@
 module Msgs exposing (..)
 
+import Keyboard exposing (KeyCode)
+
 
 type Msg
     = Input String
-    | KeyDown Int
+    | KeyDown KeyCode
+    | KeyUp KeyCode

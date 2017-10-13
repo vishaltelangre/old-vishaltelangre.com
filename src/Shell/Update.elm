@@ -1,8 +1,10 @@
 module Shell.Update exposing (commandName, handleKeyDown)
 
 import History
+import Keyboard exposing (KeyCode)
 import Models exposing (Model)
 import Msgs exposing (Msg(..))
+import Set exposing (Set)
 import Shell.Commands exposing (ShellCommandName)
 import Ports
 
@@ -12,25 +14,48 @@ type Direction
     | Down
 
 
+enterKeyCode : KeyCode
+enterKeyCode =
+    13
+
+
+ctrlKeyCode : KeyCode
+ctrlKeyCode =
+    17
+
+
+upArrowKeyCode : KeyCode
+upArrowKeyCode =
+    38
+
+
+downArrowKeyCode : KeyCode
+downArrowKeyCode =
+    40
+
+
+lCharKeyCode : KeyCode
+lCharKeyCode =
+    76
+
+
 commandName : ShellCommandName -> Model -> ( Model, Cmd Msg )
 commandName newCommandName model =
     { model | currentCommandName = newCommandName } ! [ Cmd.none ]
 
 
-handleKeyDown : Int -> Model -> ( Model, Cmd Msg )
+handleKeyDown : KeyCode -> Model -> ( Model, Cmd Msg )
 handleKeyDown keyCode model =
-    case keyCode of
-        13 ->
-            handleEnterKeypress model
-
-        38 ->
-            handleArrowKeypress Up model
-
-        40 ->
-            handleArrowKeypress Down model
-
-        _ ->
-            model ! [ Cmd.none ]
+    if keyCode == enterKeyCode then
+        handleEnterKeypress model
+    else if keyCode == upArrowKeyCode then
+        handleArrowKeypress Up model
+    else if keyCode == downArrowKeyCode then
+        handleArrowKeypress Down model
+    else if keyCode == lCharKeyCode then
+        handleCtrlLCombinationPress model
+    else
+        model ! []
 
 
 handleEnterKeypress : Model -> ( Model, Cmd Msg )
@@ -85,3 +110,11 @@ handleArrowKeypress direction model =
 
             Nothing ->
                 model ! [ Cmd.none ]
+
+
+handleCtrlLCombinationPress : Model -> ( Model, Cmd Msg )
+handleCtrlLCombinationPress model =
+    if Set.member ctrlKeyCode model.keysDown then
+        { model | history = [] } ! []
+    else
+        model ! []

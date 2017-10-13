@@ -1,10 +1,12 @@
 module Main exposing (..)
 
+import Keyboard
 import History
 import Html exposing (Html, text, div, p, span)
 import Html.Attributes exposing (class)
 import Models exposing (Model)
 import Msgs exposing (Msg(..))
+import Set exposing (Set)
 import Shell.Update
 import Shell.View
 
@@ -19,7 +21,11 @@ update msg model =
             Shell.Update.commandName newName model
 
         KeyDown keyCode ->
-            Shell.Update.handleKeyDown keyCode model
+            { model | keysDown = Set.insert keyCode model.keysDown }
+                |> Shell.Update.handleKeyDown keyCode
+
+        KeyUp keyCode ->
+            { model | keysDown = Set.remove keyCode model.keysDown } ! []
 
 
 
@@ -56,6 +62,18 @@ viewIntro =
 
 
 
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.batch
+        [ Keyboard.downs KeyDown
+        , Keyboard.ups KeyUp
+        ]
+
+
+
 ---- PROGRAM ----
 
 
@@ -65,5 +83,5 @@ main =
         { view = view
         , init = Models.init
         , update = update
-        , subscriptions = always Sub.none
+        , subscriptions = subscriptions
         }

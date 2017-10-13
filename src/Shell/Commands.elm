@@ -296,7 +296,7 @@ shellCommandClear : ShellCommand
 shellCommandClear =
     let
         description =
-            text "Clear this mess"
+            text "Clear this mess (ctrl+l)"
 
         result =
             text ""
