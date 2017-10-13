@@ -1,4 +1,4 @@
-module Shell.Update exposing (commandName, handleKeyDown)
+module Shell.Update exposing (commandName, handleKeyDown, handleEnterKeypress)
 
 import History
 import Keyboard exposing (KeyCode)

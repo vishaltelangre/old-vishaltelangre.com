@@ -5,7 +5,7 @@ import Html exposing (Html, text, div, span, br)
 import Html.Attributes exposing (style, class)
 import Models exposing (History, HistoryItem)
 import Msgs exposing (Msg(..))
-import Shell.Commands exposing (ShellCommandName)
+import Shell.Commands exposing (ShellCommandName, shellCommandAnchor)
 import Shell.View
 
 
@@ -32,7 +32,7 @@ view history =
         viewHistoryItem ( commandName, result ) =
             div [ style [ ( "marginBottom", "10px" ) ] ]
                 [ Shell.View.promptPrefix
-                , span [ class "command" ] [ text commandName ]
+                , shellCommandAnchor commandName
                 , br [] []
                 , result
                 ]

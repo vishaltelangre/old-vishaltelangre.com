@@ -3,6 +3,7 @@ module Shell.Commands exposing (..)
 import Dict exposing (Dict)
 import Html exposing (Html, span, text, br, a, div)
 import Html.Attributes exposing (href, target, style, class)
+import Html.Events exposing (onClick)
 import Msgs exposing (Msg)
 
 
@@ -66,7 +67,7 @@ shellCommandAbout =
                 [ text "Umm... You better ask something else."
                 , br [] []
                 , text "Enter "
-                , span [ class "command" ] [ text "help" ]
+                , shellCommandAnchor "help"
                 , text " to know more about me! 🙂"
                 ]
     in
@@ -314,10 +315,7 @@ shellCommandNotFound name =
             text ""
 
         result =
-            span []
-                [ text "command not found - "
-                , span [ class "command" ] [ text name ]
-                ]
+            span [] [ text "command not found - ", shellCommandAnchor name ]
     in
         ShellCommand description result
 
@@ -350,6 +348,16 @@ usage ( name, description ) =
                 , ( "display", "inline-block" )
                 ]
             ]
-            [ span [ class "command" ] [ text name ] ]
+            [ shellCommandAnchor name ]
         , description
         ]
+
+
+shellCommandAnchor : ShellCommandName -> Html Msg
+shellCommandAnchor name =
+    a
+        [ class "command"
+        , href "javascript:void(0)"
+        , onClick (Msgs.ShellCommandClick name)
+        ]
+        [ text name ]

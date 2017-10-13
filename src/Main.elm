@@ -3,10 +3,10 @@ module Main exposing (..)
 import Keyboard
 import History
 import Html exposing (Html, text, div, p, span)
-import Html.Attributes exposing (class)
 import Models exposing (Model)
 import Msgs exposing (Msg(..))
 import Set exposing (Set)
+import Shell.Commands exposing (shellCommandAnchor)
 import Shell.Update
 import Shell.View
 
@@ -27,6 +27,10 @@ update msg model =
         KeyUp keyCode ->
             { model | keysDown = Set.remove keyCode model.keysDown } ! []
 
+        ShellCommandClick commandName ->
+            { model | currentCommandName = commandName }
+                |> Shell.Update.handleEnterKeypress
+
 
 
 ---- VIEW ----
@@ -41,7 +45,7 @@ view model =
         ]
 
 
-viewIntro : Html msg
+viewIntro : Html Msg
 viewIntro =
     div []
         [ p []
@@ -53,9 +57,9 @@ viewIntro =
             ]
         , p []
             [ span [] [ text "For more information enter command " ]
-            , span [ class "command" ] [ text "help" ]
+            , shellCommandAnchor "help"
             , span [] [ text " to list all available commands. Type " ]
-            , span [ class "command" ] [ text "about" ]
+            , shellCommandAnchor "about"
             , span [] [ text " to know a little bit about me." ]
             ]
         ]

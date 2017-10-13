@@ -7,3 +7,4 @@ type Msg
     = Input String
     | KeyDown KeyCode
     | KeyUp KeyCode
+    | ShellCommandClick String
