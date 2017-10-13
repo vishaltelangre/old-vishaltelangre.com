@@ -224,11 +224,14 @@ shellCommandContactInfo =
 
         result =
             span []
-                [ text "E-mail (GTalk): the@vishaltelangre.com"
+                [ text "E-mail (GTalk): "
+                , a [ href "mailto:the@vishaltelangre.com?Subject=Hello" ] [ text "the@vishaltelangre.com" ]
                 , br [] []
-                , text "Mobile: +91-8087729277"
+                , text "Mobile: "
+                , a [ href "tel:+91-8087729277" ] [ text "+91-80-877-29-277" ]
                 , br [] []
-                , text "Skype: vishaltelangre"
+                , text "Skype: "
+                , a [ href "skype:vishaltelangre?userinfo" ] [ text "vishaltelangre" ]
                 ]
     in
         ShellCommand description result
