@@ -43,6 +43,31 @@ allShellCommands =
         |> Dict.fromList
 
 
+autocomplete : String -> String
+autocomplete partialCommandName =
+    let
+        matchedCommandNames =
+            allShellCommands
+                |> Dict.keys
+                |> (::) "help"
+                |> List.filter (matches partialCommandName)
+    in
+        if List.length matchedCommandNames == 1 then
+            case List.head matchedCommandNames of
+                Just match ->
+                    match
+
+                Nothing ->
+                    partialCommandName
+        else
+            partialCommandName
+
+
+matches : String -> String -> Bool
+matches inputValue targetValue =
+    String.startsWith (inputValue |> String.trim |> String.toLower) targetValue
+
+
 get : ShellCommandName -> ShellCommand
 get name =
     case Dict.get name allShellCommands of

@@ -5,13 +5,18 @@ import Keyboard exposing (KeyCode)
 import Models exposing (Model)
 import Msgs exposing (Msg(..))
 import Set exposing (Set)
-import Shell.Commands exposing (ShellCommandName)
+import Shell.Commands exposing (ShellCommandName, autocomplete)
 import Ports
 
 
 type Direction
     = Up
     | Down
+
+
+tabKeyCode : KeyCode
+tabKeyCode =
+    9
 
 
 enterKeyCode : KeyCode
@@ -41,12 +46,14 @@ lCharKeyCode =
 
 commandName : ShellCommandName -> Model -> ( Model, Cmd Msg )
 commandName newCommandName model =
-    { model | currentCommandName = newCommandName } ! [ Cmd.none ]
+    { model | currentCommandName = newCommandName } ! []
 
 
 handleKeyDown : KeyCode -> Model -> ( Model, Cmd Msg )
 handleKeyDown keyCode model =
-    if keyCode == enterKeyCode then
+    if keyCode == tabKeyCode then
+        handleTabKeypress model
+    else if keyCode == enterKeyCode then
         handleEnterKeypress model
     else if keyCode == upArrowKeyCode then
         handleArrowKeypress Up model
@@ -56,6 +63,11 @@ handleKeyDown keyCode model =
         handleCtrlLCombinationPress model
     else
         model ! []
+
+
+handleTabKeypress : Model -> ( Model, Cmd Msg )
+handleTabKeypress model =
+    { model | currentCommandName = autocomplete model.currentCommandName } ! []
 
 
 handleEnterKeypress : Model -> ( Model, Cmd Msg )
