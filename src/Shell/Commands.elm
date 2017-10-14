@@ -1,7 +1,7 @@
 module Shell.Commands exposing (..)
 
 import Dict exposing (Dict)
-import Html exposing (Html, span, text, br, a, div)
+import Html exposing (Html, span, text, br, a, div, table, tr, td)
 import Html.Attributes exposing (href, target, style, class)
 import Html.Events exposing (onClick)
 import Msgs exposing (Msg)
@@ -334,22 +334,16 @@ shellCommandHelp =
                 |> (::) ( "help", description )
                 |> List.reverse
                 |> List.map usage
-                |> span []
+                |> table []
     in
         ShellCommand description result
 
 
 usage : ( ShellCommandName, Html Msg ) -> ShellCommandResult
 usage ( name, description ) =
-    div [ class "help" ]
-        [ span
-            [ style
-                [ ( "minWidth", "120px" )
-                , ( "display", "inline-block" )
-                ]
-            ]
-            [ shellCommandAnchor name ]
-        , description
+    tr []
+        [ td [] [ shellCommandAnchor name ]
+        , td [] [ description ]
         ]
 
 
