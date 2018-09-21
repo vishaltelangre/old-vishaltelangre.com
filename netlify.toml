@@ -1,0 +1,18 @@
+[Settings]
+
+[build]
+  base    = "./"
+  publish = "build/"
+  command = "npm run-script build"
+
+[[redirects]]
+  from = "/xkcd"
+  to = "https://xkcd.vishaltelangre.com"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tic-tac-toe"
+  to = "https://tic-tac-toe.vishaltelangre.com"
+  status = 301
+  force = true

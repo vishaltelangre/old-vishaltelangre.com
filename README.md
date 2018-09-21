@@ -12,11 +12,12 @@
 ### To run locally
 
 ```
+npm install
 elm-app start
 ```
 
 ### To make production build
 
 ```
-elm-app build
+npm run-script build
 ```

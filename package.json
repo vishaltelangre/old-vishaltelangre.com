@@ -1,0 +1,22 @@
+{
+  "name": "vishaltelangre.com",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/vishaltelangre/vishaltelangre.com.git"
+  },
+  "author": "Vishal Telangre <the@vishaltelangre.com>",
+  "license": "MIT",
+  "dependencies": {
+    "create-elm-app": "1.2.3"
+  },
+  "bugs": {
+    "url": "https://github.com/vishaltelangre/vishaltelangre.com/issues"
+  },
+  "homepage": "https://github.com/vishaltelangre/vishaltelangre.com#readme",
+  "devDependencies": {},
+  "scripts": {
+    "build": "elm-app build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
