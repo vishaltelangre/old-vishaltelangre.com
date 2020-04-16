@@ -141,20 +141,6 @@ shellCommandWork =
                     [ href "http://weboniselab.com", target "_blank" ]
                     [ text "Webonise Lab" ]
                 , text "."
-                , br [] []
-                , br [] []
-                , text """Maybe you don't know this; during academics,
-                          I had created a popular college search engine for
-                          colleges in Maharashtra. It was aimed to suggest
-                          colleges based on students' marks, cutoff marks
-                          and various other criteria.
-                          Head on to """
-                , a
-                    [ href "http://2zerozero.com/", target "_blank" ]
-                    [ text "2zerozero.com" ]
-                , text """ to see it live.
-                          It is a past 2012 college project, and still alive,
-                          but not actively maintained!"""
                 ]
     in
         ShellCommand description result
@@ -188,7 +174,7 @@ shellCommandSkills =
             span []
                 [ text """I am a computer programmer.
                           Primarily I write programs in Ruby, JavaScript.
-                          Hack in Go on weekends."""
+                          Hack in Rust, Elixir, Elm on weekends."""
                 ]
     in
         ShellCommand description result
@@ -205,7 +191,7 @@ shellCommandBlog =
                 [ text "I occasionally write on "
                 , a
                     [ href "http://blog.vishaltelangre.com", target "_blank" ]
-                    [ text "Poor Programmer's Blog" ]
+                    [ text "my blog" ]
                 , text "."
                 ]
     in
