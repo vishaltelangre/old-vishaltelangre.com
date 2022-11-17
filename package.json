@@ -8,7 +8,7 @@
   "author": "Vishal Telangre <the@vishaltelangre.com>",
   "license": "MIT",
   "dependencies": {
-    "create-elm-app": "1.2.3"
+    "create-elm-app": "5.22.0"
   },
   "bugs": {
     "url": "https://github.com/vishaltelangre/vishaltelangre.com/issues"
